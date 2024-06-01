@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Home Page</title>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <h1>This is home page</h1> 
+    <div class="d-flex">
+    {% for post in data %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{post.title}}</h5>
+          <h6 class="card-subtitle mb-2 text-body-secondary">{{post.author.name}}</h6>
+          <p class="card-text">{{post.content}}</p>
+          {% for cate in post.category.all%}
+          <a href="#" class="card-link">{{cate.name}}</a>
+          {% endfor %}
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'edit_post' post.id%}" class="btn btn-warning">edit</a>
+            <a href="{% url 'delete_post' post.id%}" class="btn btn-warning">delete</a>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
